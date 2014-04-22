@@ -1,0 +1,4 @@
+include README
+include *.rst
+include *.txt
+recursive-include docs *
