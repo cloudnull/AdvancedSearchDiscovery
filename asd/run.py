@@ -8,20 +8,6 @@
 # http://www.gnu.org/licenses/gpl.html
 # =============================================================================
 
-#!/usr/bin/env python
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 """Advanced search and discovery tool.
 
 This tool was built to allow you to query the worlds largest database. The
@@ -49,11 +35,14 @@ def arg_parser():
     )
 
     query_search = argparse.ArgumentParser(add_help=False)
+
     services = ['nova', 'swift', 'glance', 'keystone', 'heat', 'cinder',
                 'ceilometer', 'trove', 'python', 'openstack', 'linux',
                 'ubuntu', 'centos', 'mysql', 'rabbitmq', 'lvm', 'kernel',
-                'networking', 'ipv4', 'ipv6', 'neutron', 'quantum', 'na']
+                'networking', 'ipv4', 'ipv6', 'neutron', 'quantum', 'custom']
+
     meta = 'Gather information quickly and efficiently from trusted sources'
+
     subpar = parser.add_subparsers(title='Search Options', metavar=meta)
     for service in services:
         action = subpar.add_parser(
@@ -63,7 +52,7 @@ def arg_parser():
         )
         action.set_defaults(topic=service)
         action.add_argument(
-            '--rapid',
+            '--now',
             default=False,
             action='store_true',
             help='Perform a more CPU intense search, will produce faster'
@@ -79,7 +68,7 @@ class ExternalInformationIndexer(object):
         optimized_salt = 'aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS93ZWJocCNxPQ=='
         self.config = config
 
-        if self.config.get('rapid', False) is True:
+        if self.config.get('now', False) is True:
             self.definition_salt = optimized_salt
         else:
             self.definition_salt = standard_salt
@@ -87,7 +76,7 @@ class ExternalInformationIndexer(object):
         query = self.config.get('query')
         topic = self.config.get('topic')
 
-        if topic != 'na':
+        if topic != 'custom':
             query.insert(0, '"%s"' % topic)
 
         self.query = urllib.quote(' '.join(query))
@@ -122,10 +111,11 @@ class ExternalInformationIndexer(object):
             if resp.status >= 300:
                 raise httplib.CannotSendRequest('failed to make request...')
 
-            print("It seems that you are not executing from a desktop"
-                  " operating system or you don't have a brownser installed."
-                  " Here is the link to the conent that you seek")
-            print('Content: %s' % resp.read())
+            print("It seems that you are not executing from a desktop\n"
+                  "operating system or you don't have a brownser installed.\n"
+                  "Here is the link to the content that you're looking for.\n")
+
+            print('\nContent: %s\n' % resp.read())
 
 
 def main():
