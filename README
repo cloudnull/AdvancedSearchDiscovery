@@ -9,17 +9,17 @@ Advanced search and discovery tool
 
 This tool was built to allow you to query the worlds largest database. The
 query strings will be rendered in your local web browser as standard HTML
-content. At this time this tool is not compatible with most Server Operating
-Systems as they are generally headless and the tool does require access to a
-local web browser.
+content. If this tool is running on a headless system the tool willl provide
+you a link to the content that you are looking for.
+
 
 Why
 ---
 
-Sometimes you just need a tool that will allow you to search for things that
-may be of interest and what better way to search the world for information than
-to do it via the CLI.  This tool will assist you in finding the information
-you need to do your job, development, or research and it will do it rapidly.
+Sometimes you just need information and sometimes you want this information at
+your fingertips without the bottleneck of a mouse.
+
+If these things have ever been true for you this tool is for you.
 
 Example Usage
 -------------
@@ -30,3 +30,5 @@ Example Usage
 
 
 Follow this project at "https://github.com/cloudnull/AdvancedSearchDiscovery"
+
+
