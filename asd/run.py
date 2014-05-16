@@ -112,7 +112,7 @@ class ExternalInformationIndexer(object):
                 raise httplib.CannotSendRequest('failed to make request...')
 
             print("It seems that you are not executing from a desktop\n"
-                  "operating system or you don't have a brownser installed.\n"
+                  "operating system or you don't have a browser installed.\n"
                   "Here is the link to the content that you're looking for.\n")
 
             print('\nContent: %s\n' % resp.read())
