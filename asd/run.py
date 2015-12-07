@@ -31,7 +31,7 @@ def arg_parser():
     parser = argparse.ArgumentParser(
         usage='%(prog)s',
         description='Gather information quickly and efficiently',
-        epilog='Licensed "Apache 2.0"'
+        epilog='Licensed... Go read...'
     )
 
     query_search = argparse.ArgumentParser(add_help=False)
