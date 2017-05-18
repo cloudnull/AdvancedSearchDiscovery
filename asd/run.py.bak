@@ -20,8 +20,8 @@ local web browser.
 
 import argparse
 import base64
-import http.client
-import urllib.request, urllib.parse, urllib.error
+import httplib
+import urllib
 
 import asd
 
@@ -79,12 +79,12 @@ class ExternalInformationIndexer(object):
         if topic != 'custom':
             query.insert(0, '"%s"' % topic)
 
-        self.query = urllib.parse.quote(' '.join(query))
+        self.query = urllib.quote(' '.join(query))
 
         with asd.Timer() as time:
             self.indexer()
 
-        print(('Advanced Search completed in %s Seconds' % time.interval))
+        print('Advanced Search completed in %s Seconds' % time.interval)
 
     def indexer(self):
         """Builds the query content for our targeted search."""
@@ -104,18 +104,18 @@ class ExternalInformationIndexer(object):
         if webbrowser.open(url=query_text) is not True:
             encoder = 'dGlueXVybC5jb20='
             api = 'L2FwaS1jcmVhdGUucGhwP3VybD0lcw=='
-            conn = http.client.HTTPConnection(host=base64.decodestring(encoder))
+            conn = httplib.HTTPConnection(host=base64.decodestring(encoder))
             conn.request('GET', base64.decodestring(api) % query_text)
             resp = conn.getresponse()
 
             if resp.status >= 300:
-                raise http.client.CannotSendRequest('failed to make request...')
+                raise httplib.CannotSendRequest('failed to make request...')
 
             print("It seems that you are not executing from a desktop\n"
                   "operating system or you don't have a browser installed.\n"
                   "Here is the link to the content that you're looking for.\n")
 
-            print(('\nContent: %s\n' % resp.read()))
+            print('\nContent: %s\n' % resp.read())
 
 
 def main():
