@@ -84,7 +84,7 @@ class ExternalInformationIndexer(object):
         with asd.Timer() as time:
             self.indexer()
 
-        print(('Advanced Search completed in %s Seconds' % time.interval))
+        print('Advanced Search completed in %s Seconds' % time.interval)
 
     def indexer(self):
         """Builds the query content for our targeted search."""
@@ -115,7 +115,7 @@ class ExternalInformationIndexer(object):
                   "operating system or you don't have a browser installed.\n"
                   "Here is the link to the content that you're looking for.\n")
 
-            print(('\nContent: %s\n' % resp.read()))
+            print('\nContent: %s\n' % resp.read())
 
 
 def main():
